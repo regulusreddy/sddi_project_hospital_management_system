@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+
+    <style>
+        #pagination a {
+display:inline-block;
+margin-right:5px;
+
+}
+        *{
+  margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    -webkit-box-sizing: border-box;
+}
+*:before,
+*:after{
+    -webkit-box-sizing: border-box;
+}
+.clearfix {
+  *zoom: 1;
+}
+html{
+    font-family: Helvetica, arial, sans-serif;
+    font-size: 14px;
+}
+body{
+    background: url('');
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+header{
+    width: 100%;
+    height: auto;
+    background: black;
+}
+.header-left,
+.header-right{
+    position: relative;
+    color: white;
+    float: left;
+}
+.header-left{
+    width: 30%;
+}
+.header-right label{
+    position: absolute;
+    top: -3.7em;
+    right: 0;
+    cursor: pointer;
+}
+.header-right span{
+    position: relative;
+    width: 2em;
+    height: 2em;
+    background: rgba(255,255,255,.3);
+    -webkit-transition: all .3s ease;
+}
+.header-right span:hover{
+    background: rgba(255,255,255,.6);
+}
+.header-right span:before,
+.header-right span:after{
+    content: '';
+    position: absolute;
+    width: 2em;
+    height: .5em;
+    top: 4px;
+    left: 0;
+    background: black;
+}
+.header-right span:after{
+    top: 14px;
+}
+.header-right{
+    width: 70%;
+    text-align: right;
+}
+#open{
+    display: none;
+}
+h1{
+    font-weight: 300;
+    line-height: 40px;
+    display:inline-block;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+nav>a{
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0 2em;
+    -webkit-transition: all .3s ease;
+}
+nav>a:hover{
+    background: rgba(255,255,255,.9);
+    color: black;
+}
+.hidden-desktop{
+    display: none;
+}
+section{
+    width: 100%;
+    height: auto;
+    background-image: -webkit-linear-gradient(#80059E 0%, #550486 100%);
+}
+.section-left,
+.section-right{
+    float: left;
+}
+.section-left{
+    width: 70%;
+    padding: 3em 0;
+}
+.section-right{
+    width: 30%;
+}
+.section-title,
+.section-tagline{
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: all .4s ease;
+}
+.section-title{
+    font-size: 4em;
+    margin-bottom: .3em;
+    text-shadow: 0 3px 0px black,
+                 0 4px 0px rgba(150,150,150,.5);
+}
+.section-tagline{
+    font-size: 1em;
+}
+
+
+/*desktop*/
+@media (min-width: 767px) and (max-width: 977px) {
+    .box{
+        width: 49%;
+        margin-bottom: 5%;
+    }
+
+    ul li:nth-child(3) .box{
+        clear: both;
+    }
+
+    ul li:nth-child(2n) .box{
+        margin-right: 0;
+        clear: right;
+    }
+}
+
+/* Small monitor */
+@media (max-width: 977px){
+    nav>a{
+        padding: 0 1.5em;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+    }
+    .section-right{
+        padding: 0 0 2em;
+    }
+    .section-title{
+        font-size: 4em;
+        margin-bottom: .2em;
+    }
+    .section-tagline{
+        font-size: 1.3em;
+    }
+
+}
+
+/*  portrait tablet */
+@media (max-width: 767px) {
+    .container{
+        width: 95%;
+    }
+    nav>a{
+        padding: 0 2em;
+    }
+    h1{
+        padding: .5em 0;
+    }
+    .header-left,
+    .header-right{
+        width: 100%;
+        text-align: center;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+        padding: 2em 0;
+    }
+    .section-right{
+        padding: 1em 0 2em;
+    }
+    .section-title{
+        font-size: 3em;
+        margin-bottom: .2em;
+    }
+    .section-tagline{
+        font-size: 1.3em;
+    }
+
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    body{
+        padding: 0 .5em;
+    }
+    .container{
+        width: 90%;
+    }
+    nav{
+        height: 0;
+        overflow: hidden;
+        -webkit-transition: all .3s ease;
+    }
+
+    nav>a{
+        padding: 0 1em;
+        display: block;
+        border-bottom: solid 1px rgba(255,255,255,.1);
+    }
+    h1{
+        padding: .5em 0;
+    }
+    .header-left,
+    .header-right{
+        width: 100%;
+        text-align: center;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+        padding: 1em 0;
+    }
+    .section-right{
+        text-align: center;
+        padding: 1em 0 2em;
+    }
+    .section-title{
+        font-size: 2.4em;
+        margin-bottom: 0;
+    }
+    .section-tagline{
+        font-size: 1em;
+    }
+
+    .hidden-desktop{
+        display: block;
+    }
+
+
+}
+
+
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    .col-sm-2 sidenav{
+      font-color:black;
+
+}
+        body{
+  padding:20px 20px;
+}
+
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px;
+  color:#ccc;
+}
+
+
+    </style>
+<script type="application/javascript">
+
+    var selSpeciality="Speciality";
+    var selState="State";
+    var rows=0;
+
+
+
+
+
+        $(document).ready(function() {
+  $(".search").keyup(function () {
+    var searchTerm = $(".search").val();
+    var listItem = $('.results tbody').children('tr');
+    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+  });
+
+  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+    $(this).attr('visible','false');
+  });
+
+  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+    $(this).attr('visible','true');
+  });
+
+  var jobCount = $('.results tbody tr[visible="true"]').length;
+    $('.counter').text(jobCount + ' item');
+
+  if(jobCount == '0') {$('.no-result').show();}
+    else {$('.no-result').hide();}
+		  });
+});
+
+        $(document).ready(function() {
+    $('#filterSp').change(function() {
+        selSpeciality = $(this).find(':selected').val();
+        selSpeciality = selSpeciality.toString();
+
+var $rowsNo = $('#table tbody tr').show();
+if(selState==="State"){}
+else{
+    var $rowsNo = $('#table tbody tr').filter(function () {
+        if(selState!=="State"){
+            return $.trim($(this).find('td').eq(2).text()) !== selState
+        }
+    }).hide();
+}
+    rows=0;
+    var $rowsNo = $('#table tbody tr').filter(function () {
+        if(selSpeciality!=="Speciality"){
+            rows=rows+1;
+            return $.trim($(this).find('td').eq(1).text()) !== selSpeciality
+        }
+    }).hide();
+
+    });
+
+});
+
+
+$(document).ready(function() {
+    $('#filterSt').change(function() {
+        selState = $(this).find(':selected').val();
+        selState = selState.toString();
+
+var $rowsNo = $('#table tbody tr').show();
+if(selSpeciality==="Speciality"){}
+else{
+    var $rowsNo = $('#table tbody tr').filter(function () {
+        if(selSpeciality!=="Speciality"){
+            return $.trim($(this).find('td').eq(1).text()) !== selSpeciality
+        }
+    }).hide();
+}
+    rows=0;
+    var $rowsNo = $('#table tbody tr').filter(function () {
+        if(selState!=="State"){
+            rows=rows+1;
+            return $.trim($(this).find('td').eq(2).text()) !== selState
+        }
+    }).hide();
+    });
+
+});
+
+function Paging() {
+        var totalRows = $('#table').find('tbody tr:has(td)').length;
+        var recordPerPage = 100;
+        var totalPages = Math.ceil(totalRows / recordPerPage);
+        var $pages = $(' <button id="pages" >   </button> ');
+        for (i = 0; i < totalPages; i++) {
+            $('<span>&nbsp;' + (i + 1) + '</span>').appendTo($pages);
+        }
+        $pages.appendTo('#table');
+        $('.pageNumber').hover(
+            function () {
+                $(this).addClass('focus');
+            },
+            function () {
+                $(this).removeClass('focus');
+            }
+        );
+        $('table').find('tbody tr:has(td)').hide();
+        var tr = $('table tbody tr:has(td)');
+        for (var i = 0; i <= recordPerPage - 1; i++) {
+            $(tr[i]).show();
+        }
+        $('span').click(function (event) {
+            $('#table').find('tbody tr:has(td)').hide();
+            var nBegin = ($(this).text() - 1) * recordPerPage;
+            var nEnd = $(this).text() * recordPerPage - 1;
+            for (var i = nBegin; i <= nEnd; i++) {
+                $(tr[i]).show();
+            }
+        });
+
+}
+
+$(document).ready(Paging)
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+            <div class="header-left">
+                <h1>Hospital Management System</h1>
+            </div>
+            <div class="header-right">
+                <label for="open">
+                    <span class="hidden-desktop"></span>
+                </label>
+                <input type="checkbox" name="" id="open">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/doctors">Doctors</a>
+                    <a href="/about">About us</a>
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                </nav>
+            </div>
+        </div>
+</nav>
+<div class="form-group pull-right">
+    <input type="text" class="search form-control" placeholder="What you looking for?">
+</div>
+<span class="counter pull-right"></span>
+<table id="table" class="table table-hover table-bordered ddtf-processed results">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th class="col-md-5 col-xs-5">Name</th>
+
+
+          <th class="col-md-4 col-xs-4">Speciality
+              <div ></div>
+              <select class="form-control" id="filterSp">
+                    <option value="Speciality">Select...</option>
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="ENT">ENT</option>
+                    <option value="General Physician">General Physician</option>
+                    <option value="Gynaecologist">Gynaecologist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="Oncologist">Oncologist</option>
+                    <option value="Ophthalmologist">Ophthalmologist</option>
+                    <option value="Orthopaedist">Orthopaedist</option>
+                    <option value="Pediatric">Pediatric</option>
+                    <option value="Physiotherapist">Physiotherapist</option>
+                    <option value="Psychiatrist">Psychiatrist</option>
+                    <option value="Radiologist">Radiologist</option>
+                    <option value="Surgeon">Surgeon</option>
+                    <option value="Veterinary physician">Veterinary physician</option>
+                </select>
+          </th>
+
+      <th class="col-md-3 col-xs-3">State
+              <div ></div>
+              <select class="form-control" id="filterSt">
+					<option value="State">Select...</option>
+					<option value="AL">AL</option>
+					<option value="AK">AK</option>
+					<option value="AZ">AZ</option>
+					<option value="AR">AR</option>
+					<option value="CA">CA</option>
+					<option value="CO">CO</option>
+					<option value="CT">CT</option>
+					<option value="DE">DE</option>
+					<option value="FL">FL</option>
+					<option value="GA">GA</option>
+					<option value="HI">HI</option>
+					<option value="ID">ID</option>
+					<option value="IL">IL</option>
+					<option value="IN">IN</option>
+					<option value="IA">IA</option>
+					<option value="KS">KS</option>
+					<option value="KY">KY</option>
+					<option value="LA">LA</option>
+					<option value="ME">ME</option>
+					<option value="MD">MD</option>
+					<option value="MA">MA</option>
+					<option value="MI">MI</option>
+					<option value="MN">MN</option>
+					<option value="MS">MS</option>
+					<option value="MO">MO</option>
+					<option value="MT">MT</option>
+					<option value="NE">NE</option>
+					<option value="NV">NV</option>
+					<option value="NH">NH</option>
+					<option value="NJ">NJ</option>
+					<option value="NM">NM</option>
+					<option value="NY">NY</option>
+					<option value="NC">NC</option>
+					<option value="ND">ND</option>
+					<option value="OH">OH</option>
+					<option value="OK">OK</option>
+					<option value="OR">OR</option>
+					<option value="PA">PA</option>
+					<option value="RI">RI</option>
+					<option value="SC">SC</option>
+					<option value="SD">SD</option>
+					<option value="TN">TN</option>
+					<option value="TX">TX</option>
+					<option value="UT">UT</option>
+					<option value="VT">VT</option>
+					<option value="VA">VA</option>
+					<option value="WA">WA</option>
+					<option value="WV">WV</option>
+					<option value="WI">WI</option>
+					<option value="WY">WY</option>
+                </select>
+      </th>
+    </tr>
+    <tr class="warning no-result">
+      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+    </tr>
+  </thead>
+  <tbody>
+  {% for full_name,speciality,state,username in content %}
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><a href="/viewtimings/{{ username }}" style="color: black">{{ full_name }}</a></td>
+      <td>{{ speciality }}</td>
+      <td>{{ state }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div>
+    <a href="#" class="paginate" id="previous">Previous</a> |
+    <a href="#" class="paginate" id="next">Next</a>
+</div>
+
+</body>
+</html>

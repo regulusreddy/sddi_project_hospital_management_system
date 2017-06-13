@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+    <li><a style="background-color:#a7adba;" href="/success/receptionist/{{ user.get_username }}">My Home</a></li>
+    <li><a style="background-color:#a7adba;" href="/beds/{{ user.get_username }}">View available beds</a></li>
+<li><a style="background-color:#a7adba;" href="/admit/{{ user.get_username }}">Admit Patient</a></li>
+<li><a style="background-color:#a7adba;" href="/discharge/{{ user.get_username }}">Discharge Patient</a></li>
+    <li><a style="background-color:#a7adba;" href="/doctoradd/{{ user.get_username }}">Add Doctor</a></li>
+
+
+{% endblock %}
+
+{% block message %}
+    <script type="application/javascript">
+    $(document).ready(function() {
+        $("#doctorID").keyup(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/validatedoctor/",
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                data: $('form').serialize(),
+                //dataType : "json",
+                cache: false,
+                success: function (data) {
+                    //$("<p />", { text: data }).prependTo("#doctor_info");
+                    $("#doctor_info").text(data);
+                    //$("#comment_input").val('').focus();
+                    if (String(data).toLowerCase() === "no doctor found."){
+                        $("#transfer").prop('disabled', true);
+                    }
+                    else{
+                        $("#transfer").prop('disabled', false);
+                    }
+                },
+                failure: function(data) {
+                alert('Could not fetch data.')
+                }
+            });
+        });
+
+        $("#doctorName").keyup(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/validatedoctor/",
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                data: $('form').serialize(),
+                //dataType : "json",
+                cache: false,
+                success: function (data) {
+                    var str = String(data);
+                    var all_doctors = str.split("\n");
+                    if (String(data).toLowerCase() !== "no doctor found.") {
+                        $("#doctor_info").text("");
+                        for (i = 0; i < all_doctors.length; i++) {
+                            $("<p />", {text: all_doctors[i]}).appendTo("#doctor_info");
+                        }
+                    }
+                    else{
+                        $("#doctor_info").text("No doctor found.");
+                    }
+                    //$("<p />", { text: data }).prependTo("#doctor_info");
+                    //$("#doctor_info").text(data);
+                    //$("#comment_input").val('').focus();
+                    if (String(data).toLowerCase() !== "no doctor found."){
+                            var iden = str.split(" ", 3);
+                            var iden = str.split(" ", 3);
+                            $("#doctorID").val(iden[2]);
+                            $("#transfer").prop('disabled', false);
+                    }
+                    else{
+                        $("#doctorID").val("");
+                        $("#transfer").prop('disabled', true);
+                    }
+                },
+                failure: function(data) {
+                alert('Could not fetch data.')
+                }
+            });
+        });
+        return false;
+        });
+	</script>
+
+    <div class= "jumbotron jumbotron-fluid " >
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Patient's Name: {{ name }}</td>
+                <td></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Current State: {{ location }}</td>
+            </tr>
+            <tr>
+                <td>Contact: {{ contact }}</td>
+            </tr>
+        </tbody>
+
+        </table>
+   	</div>
+
+    {% if error %}
+		        <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ error }}.
+                </div>
+                {% endif %}
+
+<div id="doctor_info"></div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="doctorID">Doctor ID</label>
+                    <input type="text" name="doctorID" class="form-control"  id="doctorID" value="" required autocomplete="off">
+				</div>
+				</div>
+
+        <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+        <p><strong>OR</strong></p>
+                </div>
+        </div>
+
+        <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="doctorID">Doctor Name</label>
+                    <input type="text" name="doctorName" class="form-control"  id="doctorName" value="" autocomplete="off">
+				</div>
+				</div>
+
+        <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+        <label for="description">Description:</label>
+  <textarea class="form-control" rows="5" id="description" name="description" required></textarea>
+                    </div>
+				</div>
+
+    <div class="row">
+				<div class="form-group col col-md-4 col-md-offset-1">
+				<label for="submit"></label>
+				<input type="submit"  class="btn btn-success" name="transfer"  id="transfer"  value="Transfer" disabled/>
+				</div>
+				</div>
+    </form>
+
+{% endblock %}
+
+{% block side_options_messages %}
+<div class="tab-pane" id="tab_b">
+             <h4>View my Appointments</h4>
+            <p>Here we will show his appointments.</p>
+        </div>
+        <div class="tab-pane" id="tab_c">
+             <h4>My Prescriptions</h4>
+            <p>Here we will show his prescriptions.</p>
+        </div>
+        <div class="tab-pane" id="tab_d">
+             <h4>Previous Bills</h4>
+            <p>Here we will show his previous bills.</p>
+        </div>
+{% endblock %}

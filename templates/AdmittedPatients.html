@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+    <li><a style="background-color:#a7adba;" href="/success/doctor/{{ user.get_username }}">My Home</a></li>
+<li><a style="background-color:#a7adba;" href="/viewappointments/doctor/{{ user.get_username }}">View my Appointments</a></li>
+<li><a style="background-color:#a7adba;" href="/timings/{{ user.get_username }}/Monday">Set Office hours</a></li>
+<li><a style="background-color:#a7adba;" href="#tab_d" data-toggle="pill">Set consultation fees</a></li>
+    <li><a style="background-color:#a7adba;" href="/tconsent/{{ user.get_username }}/">Transfer Consent</a></li>
+    <li class="active"><a  style="background-color:#a7adba;" href="#tab_a" data-toggle="pill">Admitted patients</a></li>
+<li><a style="background-color:#a7adba;" href="/viewEarnings/doctor/{{ user.get_username }}">View my Earnings</a></li>
+    {% endblock %}
+
+{% block message %}<p> {{ message }} </p> {% endblock %}
+
+{% block side_options_messages %}
+    <form method="post">
+    {% csrf_token %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Patient Name</th>
+      <th>Description</th>
+      <th>Charges</th>
+    </tr>
+
+  </thead>
+<tbody>
+{% for x in patients %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><input type="hidden" class="form-control" id ="patient{{ forloop.counter }}"
+                 name="patient{{ forloop.counter }}" value="{{ x.patientId }}"/>{{ x }}</td>
+      <td><input type="text" class="form-control"  id="Description{{ forloop.counter }}"
+                 name="Description{{ forloop.counter }}" value="Surgery" onchange="Assign();"/></td>
+        <td><input type="text" id="Charges{{ forloop.counter }}" class="form-control"  name="Charges{{ forloop.counter }}" value="0.0"/> </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+    <input type="submit"  class="btn btn-success" name="Add"  id="Add"
+           value="Add"/>
+    </form>
+
+    <script type="application/javascript">
+
+    </script>
+{% endblock %}

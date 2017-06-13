@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+    <li><a style="background-color:#a7adba;" href="/success/doctor/{{ user.get_username }}">My Home</a></li>
+    "/viewappointments/doctor/{{ user.get_username }}"
+    <li><a style="background-color:#a7adba;" href="/viewappointments/doctor/{{ user.get_username }}">View my appointments</a></li>
+    <li class="active"><a  style="background-color:#a7adba;" href="#tab_a" data-toggle="pill">Set Office hours</a></li>
+<li><a style="background-color:#a7adba;" href="#tab_d" data-toggle="pill">Set consultation fees</a></li>
+    <li><a style="background-color:#a7adba;" href="/tconsent/{{ user.get_username }}/">Transfer Consent</a></li>
+    <li><a style="background-color:#a7adba;" href="/admittedPatients/doctor/{{ user.get_username }}">Admitted patients</a></li>
+<li><a style="background-color:#a7adba;" href="/viewEarnings/doctor/{{ user.get_username }}">View my Earnings</a></li>
+{% endblock %}
+
+{% block message %}
+    <div class="container pull-right">
+     <h2 > Set Office Hours</h2>
+                {% if error %}
+		        <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ error }}.
+                </div>
+                {% endif %}
+    {% if message %}
+            <div class="alert alert-success">
+  <strong>Done!</strong> {{ message }}
+</div>
+    {% endif %}
+<form name="setOfficeHours" id="setOfficeHours" method="post">
+                    {% csrf_token %}
+
+                <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-6">
+				<label for="roomType">Days</label>
+                    <br>
+                    <a href="/timings/{{ user.get_username }}/Monday/" style="color: black">Monday</a>
+                    <br>
+                    <a href="/timings/{{ user.get_username }}/Tuesday/" style="color: black">Tuesday</a>
+                    <br>
+                    <a href="/timings/{{ user.get_username }}/Wednesday/" style="color: black">Wednesday</a>
+                    <br>
+                    <a href="/timings/{{ user.get_username }}/Thursday/" style="color: black">Thursday</a>
+                    <br>
+                    <a href="/timings/{{ user.get_username }}/Friday/" style="color: black">Friday</a>
+                    <br>
+                    <a href="/timings/{{ user.get_username }}/Saturday/" style="color: black">Saturday</a>
+                    <br>
+
+				</div>
+
+    <label>{{ time }}</label>
+
+
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="StartTime">From</label>
+				<input type="text" name="starttime" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]([0]|[5]) (([a][m])|([p][m]))$" class="form-control"  id="StartTime" required>
+				</div>
+
+                <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="EndTime">To</label>
+				<input type="text" name="endtime" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]([0]|[5]) (([a][m])|([p][m]))$" class="form-control"  id="EndTime" required>
+				</div>
+				</div>
+
+                <div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="StartTime2">From</label>
+				<input type="text" name="starttime2" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]([0]|[5]) (([a][m])|([p][m]))$" class="form-control"  id="StartTime2" required>
+				</div>
+
+                <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="EndTime2">To</label>
+				<input type="text" name="endtime2" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5]([0]|[5]) (([a][m])|([p][m]))$" class="form-control"  id="EndTime2" required>
+				</div>
+				</div>
+
+                <div class="form-group col col-md-4 col-md-offset-1">
+				<label for="submit"></label>
+				<input type="submit"  class="btn btn-success" name="Update"  id="Update"  value="Update">
+				</div>
+
+			</form>
+    </div>
+{% endblock %}
+
+{% block side_options_messages %}
+
+{% endblock %}

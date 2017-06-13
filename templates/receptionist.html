@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+    <li class="active"><a style="background-color:#a7adba;" href="#tab_a" data-toggle="pill">My Home</a></li>
+<li><a style="background-color:#a7adba;" href="/beds/{{ user.get_username }}">View available beds</a></li>
+<li><a style="background-color:#a7adba;" href="/admit/{{ user.get_username }}">Admit Patient</a></li>
+<li><a style="background-color:#a7adba;" href="/discharge/{{ user.get_username }}">Discharge Patient</a></li>
+    <li><a style="background-color:#a7adba;" href="/doctoradd/{{ user.get_username }}">Add Doctor</a></li>
+{% endblock %}
+
+{% block message %} <p>Welcome {{ user.get_username }}</p>{% endblock %}
+
+{% block side_options_messages %}
+<div class="tab-pane" id="tab_b">
+             <h4>View my Appointments</h4>
+            <p>Here we will show his appointments.</p>
+        </div>
+        <div class="tab-pane" id="tab_c">
+             <h4>My Prescriptions</h4>
+            <p>Here we will show his prescriptions.</p>
+        </div>
+        <div class="tab-pane" id="tab_d">
+             <h4>Previous Bills</h4>
+            <p>Here we will show his previous bills.</p>
+        </div>
+{% endblock %}

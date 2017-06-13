@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+    <li><a style="background-color:#a7adba;" href="/success/receptionist/{{ user.get_username }}">My Home</a></li>
+<li><a style="background-color:#a7adba;" href="/beds/{{ user.get_username }}">View available beds</a></li>
+<li><a style="background-color:#a7adba;" href="/admit/{{ user.get_username }}">Admit Patient</a></li>
+<li><a style="background-color:#a7adba;" href="/discharge/{{ user.get_username }}">Discharge Patient</a></li>
+    <li class="active"><a style="background-color:#a7adba;" href="#tab_a" data-toggle="pill">Add Doctor</a></li>
+{% endblock %}
+
+{% block message %}
+    <div class="container pull-right">
+                {% if error %}
+		        <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ error }}.
+                </div>
+                {% endif %}
+
+				<h2> Registration Form</h2>
+				<form name="registration" id="registration" method="post">
+                    {% csrf_token %}
+				<div class="row row-centered">
+				<div class="form-group col col-md-6 col-centered col-md-offset-1">
+				<label for="email">Email Address</label>
+				<input type="email" name="email" class="form-control"  id="email" required>
+				</div>
+				</div>
+
+                    <div class="row row-centered">
+				<div class="form-group col col-md-6 col-centered col-md-offset-1">
+				<label for="email_confirm">Confirm Email Address</label>
+				<input type="email" name="email_confirm" class="form-control"  id="email_confirm" required>
+				</div>
+				</div>
+
+                    <div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="username">Username</label>
+				<input type="text" name="username" class="form-control" id="username" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="fname">First Name</label>
+				<input type="text" name="fname" class="form-control" id="fname" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="lname">Last Name</label>
+				<input type="text" name="lname" class="form-control" id="lname" required>
+				</div>
+				</div>
+
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="Gender">Gender</label>
+				<label for="Gender">Male <input type="radio" class= "form-check" name="gender" id="gender" value="Male" ></label>
+				<label for="Gender">Female <input type="radio" class= "form-check" name="gender" id="gender" value="Female" ></label><br>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="dob">Date of Birth</label>
+				<input type="date" class="form-control" id="dob" name="dob"><br>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="mobileno">Phone Number</label>
+				<input type="tel" id="mobileno" name="mobileno" class="form-control" message="Please enter a valid phone number"  max length="12" required >
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="address">Address</label>
+				<input type="text" class="form-control" id="address" name="address" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="zipcode">Zipcode</label>
+				<input type="text" class="form-control" id="zipcode" name="zipcode" patter="(\d{5}([\-]\d{4})?)" required >
+				</div>
+				</div>
+
+                    <div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="state">State</label>
+				<input type="text" class="form-control" id="state" name="state" required>
+				</div>
+				</div>
+
+                    <div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="speciality">Speciality</label>
+				<input type="text" class="form-control" id="speciality" name="speciality" required>
+				</div>
+				</div>
+
+                    <div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="status">Status</label>
+				<input type="text" class="form-control" id="status" name="status" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="submit"></label>
+				<input type="submit"  class="btn btn-success" name="submit"  id="submit"  value="Register">
+				</div>
+				</div>
+			</form>
+</div>
+{% endblock %}
+
+{% block side_options_messages %}
+<div class="tab-pane" id="tab_b">
+             <h4>View my Appointments</h4>
+            <p>Here we will show his appointments.</p>
+        </div>
+        <div class="tab-pane" id="tab_c">
+             <h4>My Prescriptions</h4>
+            <p>Here we will show his prescriptions.</p>
+        </div>
+        <div class="tab-pane" id="tab_d">
+             <h4>Previous Bills</h4>
+            <p>Here we will show his previous bills.</p>
+        </div>
+{% endblock %}

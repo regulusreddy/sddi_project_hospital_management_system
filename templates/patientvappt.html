@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+<li><a style="background-color:#a7adba;" href="/success/patient/{{ user.get_username }}">My Home</a></li>
+    <li class="active"><a style="background-color:#a7adba;">View my Appointments</a></li>
+<li><a style="background-color:#a7adba;" href="/viewbills/patient/{{ user.get_username }}">Previous Bills</a></li>
+    <li><a style="background-color:#a7adba;" href="/settlebill/patient/{{ user.get_username }}">Settle Bill</a></li>
+{% endblock %}
+
+{% block message %}
+    <div class="tab-pane" id="tab_b">
+                <div class="container ">
+    <table id="doctor" class="display" cellspacing="0" width="850px">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Day</th>
+                <th>State</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+<tbody>
+{% for name, date, time, day, state in content %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ date }}</td>
+                <td>{{ time }}</td>
+                <td>{{ day }}</td>
+                <td>{{ state }}</td>
+                <td><input type="button" id="cancel" value="Cancel Appointment"></td>
+            </tr>
+{% endfor %}
+</tbody>
+    <br>
+        <br>
+
+
+    </table>
+                </div>
+    </div>
+
+    <script>
+
+    $(document).ready(function() {
+
+    $('#doctor').DataTable({
+        "scrollX":true
+
+    });
+
+
+
+    $('input[type="button"]').click(function(e){
+   $(this).closest('tr').remove()
+});
+
+} );
+    </script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+
+{% block side_options_messages %}
+    <p></p>
+{% endblock %}

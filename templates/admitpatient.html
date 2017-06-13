@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+
+    <li><a style="background-color:#a7adba;" href="/success/receptionist/{{ user.get_username }}">My Home</a></li>
+    <li><a style="background-color:#a7adba;" href="/beds/{{ user.get_username }}">View available beds</a></li>
+<li><a style="background-color:#a7adba;" href="/admit/{{ user.get_username }}">Admit Patient</a></li>
+<li><a style="background-color:#a7adba;" href="/discharge/{{ user.get_username }}">Discharge Patient</a></li>
+    <li><a style="background-color:#a7adba;" href="/doctoradd/{{ user.get_username }}">Add Doctor</a></li>
+
+
+{% endblock %}
+
+{% block message %}
+    {% if message %}
+        {{ message }}
+    {% endif %}
+{% if error %}
+		        <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ error }}.
+                </div>
+                {% endif %}
+<form method="post">
+    {% csrf_token %}
+    			<div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="roomType">Room Type</label>
+				    <select class="form-control" id="filterRoom">
+                    <option value="Speciality">Select...</option>
+                        <option value="AC Deluxe">AC Deluxe</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="General">General</option>
+                        <option value="ICU">ICU</option>
+                </select></div>
+				</div>
+                <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="patientID">Patient ID</label>
+				<input type="text" name="patientID" class="form-control"  id="patientID" value="" required>
+				</div>
+				</div>
+                <div class="row vertical-center-row"   >
+				<div class="form-group col col-md-4 col-centered col-md-offset-1">
+				<label for="doctorName">Doctor</label>
+				<input type="text" name="doctorName" class="form-control"  id="doctorName" required>
+				</div>
+				</div>
+    <input type="hidden" name="roomtype" class="form-control"  id="roomtype" value="roomtype" >
+    <input type="hidden" name="room" class="form-control"  id="room" value="room">
+    <input type="hidden" name="bed" class="form-control"  id="bed" value="bed">
+    <table id="tableRooms" class="table table-hover table-bordered ddtf-processed results" hidden >
+  <thead>
+    <tr>
+        <th class="col-md-5 col-xs-5">Room Type</th>
+      <th class="col-md-5 col-xs-5">Room #</th>
+        <th class="col-md-4 col-xs-4">Bed #</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in d %}
+        <td><a href="#" onclick="admitPatient();" style="color:black"> {{ x.room_type }}</a></td>
+      <td>{{ x.room_number }}</td>
+      <td>{{ x.bed_number }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    <p>{{ patientId }}</p>
+</table>
+                <div class="row">
+				<div class="form-group col col-md-4 col-md-offset-1">
+				<label for="submit"></label>
+				<input type="submit"  class="btn btn-success" name="Admit"  id="Admit"  value="Admit" disabled/>
+				</div>
+				</div>
+
+<form/>
+<p>{{ e }}</p>
+<script type="application/javascript">
+
+    $(document).ready(function() {
+    $('#filterRoom').change(function() {
+        var roomType = $(this).find(':selected').val();
+        roomType = roomType.toString();
+
+    var $rowsNo = $('#tableRooms').show();
+
+
+    var $rowsNo = $('#tableRooms  tbody tr').filter(function () {
+    if(roomType!==$.trim($(this).find('td').eq(0).text())){
+            return 1
+        }
+    }).hide();
+    var $rowsNo = $('#tableRooms  tbody tr').filter(function () {
+    if(roomType===$.trim($(this).find('td').eq(0).text())){
+            return 1
+        }
+    }).show();
+
+    });
+
+});
+
+    $('table tr td a').click(function(){
+        $('#roomtype').val($(this).closest('td').text().toString())
+        $('#room').val($(this).closest('tr').text().toString().split("\n")[1])
+        $('#bed').val($(this).closest('tr').text().toString().split("\n")[2])
+        $(this).find('td').each (function() {
+
+});
+});
+
+    function admitPatient(){
+        var patientId =$("#patientID").val()
+        var doctorId = $("#doctorName").val()
+        if ((patientId!='') && (doctorId!='')){
+            $('#Admit').prop('disabled',false);
+                    $("#")
+            }
+            else{
+                    alert('Enter the patient Id and Doctor name first');
+        }
+
+
+
+    }
+
+</script>
+
+
+
+{% endblock %}
+
+{% block side_options_messages %}
+<div class="tab-pane" id="tab_b">
+             <h4>View my Appointments</h4>
+            <p>Here we will show his appointments.</p>
+        </div>
+        <div class="tab-pane" id="tab_c">
+             <h4>My Prescriptions</h4>
+            <p>Here we will show his prescriptions.</p>
+        </div>
+        <div class="tab-pane" id="tab_d">
+             <h4>Previous Bills</h4>
+            <p>Here we will show his previous bills.</p>
+        </div>
+{% endblock %}

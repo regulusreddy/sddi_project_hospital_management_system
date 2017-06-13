@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+
+
+{% block title %}Welcome {{ user.get_username }} {% endblock %}
+
+{% block loggedusername %} {{ user.get_username }} {% endblock %}
+
+{% block side_options %}
+    <li><a style="background-color:#a7adba;" >My Home</a></li>
+    <li><a style="background-color:#a7adba;" >View available beds</a></li>
+<li><a style="background-color:#a7adba;" >Admit Patient</a></li>
+<li><a style="background-color:#a7adba;" >Discharge Patient</a></li>
+    <li><a style="background-color:#a7adba;" >Add Doctor</a></li>
+
+
+{% endblock %}
+
+{% block message %}
+
+<style>
+    .invoice-box{
+        max-width:800px;
+        margin:auto;
+        padding:30px;
+        border:1px solid #eee;
+        box-shadow:0 0 10px rgba(0, 0, 0, .15);
+        font-size:16px;
+        line-height:24px;
+        font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color:#555;
+    }
+
+    .invoice-box table{
+        width:100%;
+        line-height:inherit;
+        text-align:left;
+    }
+
+    .invoice-box table td{
+        padding:5px;
+        vertical-align:top;
+    }
+
+    .invoice-box table tr td:nth-child(2){
+        text-align:right;
+    }
+
+    .invoice-box table tr.top table td{
+        padding-bottom:20px;
+    }
+
+    .invoice-box table tr.top table td.title{
+        font-size:45px;
+        line-height:45px;
+        color:#333;
+    }
+
+    .invoice-box table tr.information table td{
+        padding-bottom:40px;
+    }
+
+    .invoice-box table tr.heading td{
+        background:#eee;
+        border-bottom:1px solid #ddd;
+        font-weight:bold;
+    }
+
+    .invoice-box table tr.details td{
+        padding-bottom:20px;
+    }
+
+    .invoice-box table tr.item td{
+        border-bottom:1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td{
+        border-bottom:none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2){
+        border-top:2px solid #eee;
+        font-weight:bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td{
+            width:100%;
+            display:block;
+            text-align:center;
+        }
+
+        .invoice-box table tr.information table td{
+            width:100%;
+            display:block;
+            text-align:center;
+        }
+    }
+    </style>
+
+
+
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0" id="Table">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                {% load static %}
+                                <img src="{% static "img/logo.png" %}" style="width:100%; max-width:300px;" />
+                            </td>
+
+                            <td >
+                                Admitted: {{ content.dateOfAdmission }}<br>
+                                Discharged: {{ content.dateOfDischarge }}<br>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                UNCC <br>
+                                9201 University City Blvd,<br>
+                                Charlotte, NC 28223
+                            </td>
+
+                            <td>
+                                {{ name }}<br>
+                                {{ address }}<br>
+                                {{ email }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+
+            <tr class="heading">
+                <td>
+                    Item
+                </td>
+
+                <td>
+                    Price
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    Doctor Fees
+                </td>
+
+                <td>
+                    {{ content.doctor_Fees }}
+                </td>
+            </tr>
+
+            {% for x in content.Extra_Charges %}
+                <tr class="item">
+                <td>
+                    {{ x.charge_Description }}
+                </td>
+
+                <td>
+                    {{ x.charge_Value }}
+                </td>
+                </tr>
+            {% endfor %}
+
+            <tr class="item" id="desc">
+                <td>
+                    <input type="text" name="description" class="form-control"  id="description" value="description" >
+                </td>
+
+                <td>
+                    <input type="text" name="charge" class="form-control"  id="charge" value="0.0" disabled>
+                </td>
+            </tr>
+
+
+            <tr class="total" id="total">
+                <td></td>
+
+                <td id="total_charges">
+                   Total: {{ charges }}
+                </td>
+            </tr>
+        </table>
+    </div>
+<br>
+<br>
+</body>
+
+
+
+
+
+    <span class="counter pull-right"></span>
+
+<form action="\generateBill\{{ user }}\" method="post">
+    {% csrf_token %}
+    <label for="submit"></label>
+    <input type="submit"  class="btn btn-success" name="Update"  id="Update"  value="Update"/>
+    <input type="hidden" name="patientID1" class="form-control"  id="patientID1" value="{{ patient }}" >
+    <input type="hidden" name="description11" class="form-control"  id="description11" value="">
+    <input type="hidden" name="tcharges1" class="form-control"  id="tcharges1" value=0.0>
+<form/>
+
+
+<form  action="\generateBill\{{ user }}\" method="post">
+    {% csrf_token %}
+    <label for="submit"></label>
+    <input type="submit"  class="btn btn-success" name="Generate_Bill"  id="Generate_Bill"  value="Generate_Bill" />
+    <input type="hidden" name="patientID2" class="form-control"  id="patientID2" value="{{ patient }}" >
+    <input type="hidden" name="description12" class="form-control"  id="description12" value="">
+    <input type="hidden" name="doctorName" class="form-control"  id="doctorName" value={{ docName }}>
+    <input type="hidden" name="tcharges2" class="form-control"  id="tcharges2" value=0.0>
+<form/>
+
+<script type="application/javascript">
+
+
+$("#charge").change(function() {
+    $('#tcharges1').val(parseFloat($('#charge').val()))
+    $('#tcharges2').val(parseFloat($('#charge').val()))
+
+});
+$("#description").change(function() {
+    $('#charge').prop('disabled',false);
+    $('#description11').val($('#description').val())
+    $('#description12').val($('#description').val())
+});
+
+$(document).ready(function() {
+
+  $(".search").keyup(function () {
+    var searchTerm = $(".search").val();
+    var listItem = $('.results tbody').children('tr');
+    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+  });
+
+  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+    $(this).attr('visible','false');
+  });
+
+  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+    $(this).attr('visible','true');
+  });
+
+  var jobCount = $('.results tbody tr[visible="true"]').length;
+    $('.counter').text(jobCount + ' item');
+
+  if(jobCount == '0') {$('.no-result').show();}
+    else {$('.no-result').hide();}
+		  });
+});
+
+$(document).ready(function() {
+        $('#Admit').on("click",function() {
+
+    });
+});
+
+
+
+{% for full_name,doctor_name in content %}
+      $('#row{{ forloop.counter }}').on("click",function() {
+        $('#patientID').val($(this).closest('tr').text().toString().split("\n")[1])
+        $('#doctorName').val($(this).closest('tr').text().toString().split("\n")[2])
+        if (($('#patientID').val!='') && ($('#doctorName').val!='')){
+            $('#Discharge').prop('disabled',false);
+        }
+        $(this).find('td').each (function() { });
+    });
+  {% endfor %}
+
+
+</script>
+
+
+
+{% endblock %}
+
+{% block side_options_messages %}
+<div class="tab-pane" id="tab_b">
+             <h4>View my Appointments</h4>
+            <p>Here we will show his appointments.</p>
+        </div>
+        <div class="tab-pane" id="tab_c">
+             <h4>My Prescriptions</h4>
+            <p>Here we will show his prescriptions.</p>
+        </div>
+        <div class="tab-pane" id="tab_d">
+             <h4>Previous Bills</h4>
+            <p>Here we will show his previous bills.</p>
+        </div>
+{% endblock %}

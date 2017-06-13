@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    *{
+  margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    -webkit-box-sizing: border-box;
+}
+*:before,
+*:after{
+    -webkit-box-sizing: border-box;
+}
+.clearfix {
+  *zoom: 1;
+}
+html{
+    font-family: Helvetica, arial, sans-serif;
+    font-size: 14px;
+}
+body{
+    background: url('');
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+header{
+    width: 100%;
+    height: auto;
+    background: black;
+}
+.header-left,
+.header-right{
+    position: relative;
+    color: white;
+    float: left;
+}
+.header-left{
+    width: 30%;
+}
+.header-right label{
+    position: absolute;
+    top: -3.7em;
+    right: 0;
+    cursor: pointer;
+}
+.header-right span{
+    position: relative;
+    width: 2em;
+    height: 2em;
+    background: rgba(255,255,255,.3);
+    -webkit-transition: all .3s ease;
+}
+.header-right span:hover{
+    background: rgba(255,255,255,.6);
+}
+.header-right span:before,
+.header-right span:after{
+    content: '';
+    position: absolute;
+    width: 2em;
+    height: .5em;
+    top: 4px;
+    left: 0;
+    background: black;
+}
+.header-right span:after{
+    top: 14px;
+}
+.header-right{
+    width: 70%;
+    text-align: right;
+}
+#open{
+    display: none;
+}
+h1{
+    font-weight: 300;
+    line-height: 40px;
+    display:inline-block;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+nav>a{
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0 2em;
+    -webkit-transition: all .3s ease;
+}
+nav>a:hover{
+    background: rgba(255,255,255,.9);
+    color: black;
+}
+.hidden-desktop{
+    display: none;
+}
+section{
+    width: 100%;
+    height: auto;
+    background-image: -webkit-linear-gradient(#80059E 0%, #550486 100%);
+}
+.section-left,
+.section-right{
+    float: left;
+}
+.section-left{
+    width: 70%;
+    padding: 3em 0;
+}
+.section-right{
+    width: 30%;
+}
+.section-title,
+.section-tagline{
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: all .4s ease;
+}
+.section-title{
+    font-size: 4em;
+    margin-bottom: .3em;
+    text-shadow: 0 3px 0px black,
+                 0 4px 0px rgba(150,150,150,.5);
+}
+.section-tagline{
+    font-size: 1em;
+}
+
+
+/*desktop*/
+@media (min-width: 767px) and (max-width: 977px) {
+    .box{
+        width: 49%;
+        margin-bottom: 5%;
+    }
+
+    ul li:nth-child(3) .box{
+        clear: both;
+    }
+
+    ul li:nth-child(2n) .box{
+        margin-right: 0;
+        clear: right;
+    }
+}
+
+/* Small monitor */
+@media (max-width: 977px){
+    nav>a{
+        padding: 0 1.5em;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+    }
+    .section-right{
+        padding: 0 0 2em;
+    }
+    .section-title{
+        font-size: 4em;
+        margin-bottom: .2em;
+    }
+    .section-tagline{
+        font-size: 1.3em;
+    }
+    
+}
+ 
+/*  portrait tablet */
+@media (max-width: 767px) {
+    .container{
+        width: 95%;
+    }
+    nav>a{
+        padding: 0 2em;
+    }
+    h1{
+        padding: .5em 0;
+    }
+    .header-left,
+    .header-right{
+        width: 100%;
+        text-align: center;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+        padding: 2em 0;
+    }
+    .section-right{
+        padding: 1em 0 2em;
+    }
+    .section-title{
+        font-size: 3em;
+        margin-bottom: .2em;
+    }
+    .section-tagline{
+        font-size: 1.3em;
+    }
+   
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    body{
+        padding: 0 .5em;
+    }
+    .container{
+        width: 90%;
+    }
+    nav{
+        height: 0;
+        overflow: hidden;
+        -webkit-transition: all .3s ease;
+    }
+    
+    nav>a{
+        padding: 0 1em;
+        display: block;
+        border-bottom: solid 1px rgba(255,255,255,.1);
+    }
+    h1{
+        padding: .5em 0;
+    }
+    .header-left,
+    .header-right{
+        width: 100%;
+        text-align: center;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+        padding: 1em 0;
+    }
+    .section-right{
+        text-align: center;
+        padding: 1em 0 2em;
+    }
+    .section-title{
+        font-size: 2.4em;
+        margin-bottom: 0;
+    }
+    .section-tagline{
+        font-size: 1em;
+    }
+   
+    .hidden-desktop{
+        display: block;
+    }
+
+
+}
+
+
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    .col-sm-2 sidenav{
+      font-color:black;
+    
+}    
+    
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+            <div class="header-left">
+                <h1>Hospital Management System</h1>
+            </div>
+            <div class="header-right">
+                <label for="open">
+                    <span class="hidden-desktop"></span>
+                </label>
+                <input type="checkbox" name="" id="open">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/about/">About us</a>
+                    <a href="register.html">Register</a>
+                    <a href="login.html">Login</a>
+                    
+                </nav>
+            </div>
+        </div>
+</nav>
+
+
+
+
+
+
+    

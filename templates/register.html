@@ -1,0 +1,450 @@
+<html>
+<head>
+   <title>Registration Page</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script type="text/javascript" src="validator/src/js/bootstrapValidator.js"></script>
+
+
+  
+
+	<!-- Optional theme -->
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<style>
+
+.container form input[type="submit"]{
+		 
+		width:100%;
+}
+
+*{
+  margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    -webkit-box-sizing: border-box;
+}
+*:before,
+*:after{
+    -webkit-box-sizing: border-box;
+}
+.clearfix {
+  *zoom: 1;
+}
+html{
+    font-family: Helvetica, arial, sans-serif;
+    font-size: 14px;
+}
+body{
+    background: url('');
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+header{
+    width: 100%;
+    height: auto;
+    background: black;
+}
+.header-left,
+.header-right{
+    position: relative;
+    color: white;
+    float: left;
+}
+.header-left{
+    width: 30%;
+}
+.header-right label{
+    position: absolute;
+    top: -3.7em;
+    right: 0;
+    cursor: pointer;
+}
+.header-right span{
+    position: relative;
+    width: 2em;
+    height: 2em;
+    background: rgba(255,255,255,.3);
+    -webkit-transition: all .3s ease;
+}
+.header-right span:hover{
+    background: rgba(255,255,255,.6);
+}
+.header-right span:before,
+.header-right span:after{
+    content: '';
+    position: absolute;
+    width: 2em;
+    height: .5em;
+    top: 4px;
+    left: 0;
+    background: black;
+}
+.header-right span:after{
+    top: 14px;
+}
+.header-right{
+    width: 70%;
+    text-align: right;
+}
+#open{
+    display: none;
+}
+h1{
+    font-weight: 300;
+    line-height: 40px;
+    display:inline-block;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+nav>a{
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0 2em;
+    -webkit-transition: all .3s ease;
+}
+nav>a:hover{
+    background: rgba(255,255,255,.9);
+    color: black;
+}
+.hidden-desktop{
+    display: none;
+}
+section{
+    width: 100%;
+    height: auto;
+    background-image: -webkit-linear-gradient(#80059E 0%, #550486 100%);
+}
+.section-left,
+.section-right{
+    float: left;
+}
+.section-left{
+    width: 70%;
+    padding: 3em 0;
+}
+.section-right{
+    width: 30%;
+}
+.section-title,
+.section-tagline{
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: all .4s ease;
+}
+.section-title{
+    font-size: 4em;
+    margin-bottom: .3em;
+    text-shadow: 0 3px 0px black,
+                 0 4px 0px rgba(150,150,150,.5);
+}
+.section-tagline{
+    font-size: 1em;
+}
+
+
+/*desktop*/
+@media (min-width: 767px) and (max-width: 977px) {
+    .box{
+        width: 49%;
+        margin-bottom: 5%;
+    }
+
+    ul li:nth-child(3) .box{
+        clear: both;
+    }
+
+    ul li:nth-child(2n) .box{
+        margin-right: 0;
+        clear: right;
+    }
+}
+
+/* Small monitor */
+@media (max-width: 977px){
+    nav>a{
+        padding: 0 1.5em;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+    }
+    .section-right{
+        padding: 0 0 2em;
+    }
+    .section-title{
+        font-size: 4em;
+        margin-bottom: .2em;
+    }
+    .section-tagline{
+        font-size: 1.3em;
+    }
+    
+}
+ 
+/*  portrait tablet */
+@media (max-width: 767px) {
+    .container{
+        width: 95%;
+    }
+    nav>a{
+        padding: 0 2em;
+    }
+    h1{
+        padding: .5em 0;
+    }
+    .header-left,
+    .header-right{
+        width: 100%;
+        text-align: center;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+        padding: 2em 0;
+    }
+    .section-right{
+        padding: 1em 0 2em;
+    }
+    .section-title{
+        font-size: 3em;
+        margin-bottom: .2em;
+    }
+    .section-tagline{
+        font-size: 1.3em;
+    }
+   
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    body{
+        padding: 0 .5em;
+    }
+    .container{
+        width: 90%;
+    }
+    nav{
+        height: 0;
+        overflow: hidden;
+        -webkit-transition: all .3s ease;
+    }
+    input[type="checkbox"]:checked + nav{
+        height: 205px;
+    }
+    nav>a{
+        padding: 0 1em;
+        display: block;
+        border-bottom: solid 1px rgba(255,255,255,.1);
+    }
+    h1{
+        padding: .5em 0;
+    }
+    .header-left,
+    .header-right{
+        width: 100%;
+        text-align: center;
+    }
+    .section-left,
+    .section-right{
+        width: 100%;
+    }
+    .section-left{
+        text-align: center;
+        padding: 1em 0;
+    }
+    .section-right{
+        text-align: center;
+        padding: 1em 0 2em;
+    }
+    .section-title{
+        font-size: 2.4em;
+        margin-bottom: 0;
+    }
+    .section-tagline{
+        font-size: 1em;
+    }
+   
+    .hidden-desktop{
+        display: block;
+    }
+
+}
+
+
+
+
+</style>
+
+<header class="clearfix">
+    <div class="container">
+            <div class="header-left">
+                <h1>Hospital Management System</h1>
+            </div>
+            <div class="header-right">
+                <label for="open">
+                    <span class="hidden-desktop"></span>
+                </label>
+                <input type="checkbox" name="" id="open">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/doctors">Doctors</a>
+                    <a href="/about">About us</a>
+                    <a href="#">Register</a>
+                    <a href="/login">Login</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </header>
+
+<body>
+
+
+
+
+<div class="container pull-right">
+                {% if error %}
+		        <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ error }}.
+                </div>
+                {% endif %}
+		
+				<h2> Registration Form</h2>
+				<form name="registration" id="registration" method="post">
+                    {% csrf_token %}
+				<div class="row row-centered">
+				<div class="form-group col col-md-6 col-centered col-md-offset-1">
+				<label for="email">Email Address</label>
+				<input type="email" name="email" class="form-control"  id="email" required>
+				</div>
+				</div>
+
+                    <div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="username">Username</label>
+				<input type="text" name="username" class="form-control" id="username" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="password" >Password</label>
+				<input type="password" name="password" class="form-control" id="password" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="confirmpassword">Confirm Password</label>
+				<input type="password" name="confirm_password" class="form-control" id="confirm_password"  required minlength="5">
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="fname">First Name</label>
+				<input type="text" name="fname" class="form-control" id="fname" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="lname">Last Name</label>
+				<input type="text" name="lname" class="form-control" id="lname" required>
+				</div>
+				</div>
+
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="Gender">Gender</label>
+				<label for="Gender">Male <input type="radio" class= "form-check" name="gender" id="gender" value="Male" ></label>
+				<label for="Gender">Female <input type="radio" class= "form-check" name="gender" id="gender" value="Female" ></label><br>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="dob">Date of Birth</label>
+				<input type="date" class="form-control" id="dob" name="dob"><br>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="insured">Insured</label>
+				<label>Yes <input type="radio" class= "form-check" name="insurance" id="insurance" value="Yes" ></label>
+				<label>No <input type="radio" class= "form-check" name="insurance" id="insurance" value="No" ></label><br>
+				</div>
+				</div>
+	
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="mobileno">Phone Number</label>
+				<input type="tel" id="mobileno" name="mobileno" class="form-control" message="Please enter a valid phone number"  max length="12" required >
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">	
+				<label for="address">Address</label>
+				<input type="text" class="form-control" id="address" name="address" required>
+				</div>
+				</div>
+				
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="zipcode">Zipcode</label>
+				<input type="text" class="form-control" id="zipcode" name="zipcode" patter="(\d{5}([\-]\d{4})?)" required >
+				</div>
+				</div>
+
+                    <div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="state">State</label>
+				<input type="text" class="form-control" id="state" name="state" required>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="form-group col col-md-6 col-md-offset-1">
+				<label for="submit"></label>
+				<input type="submit"  class="btn btn-success" name="submit"  id="submit"  value="Register">
+				</div>
+				</div>
+  
+
+				
+			</form>
+</div>
+
+</body>
+</html>
